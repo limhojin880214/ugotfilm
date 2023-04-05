@@ -1,0 +1,6 @@
+export const Role = {
+  MEMBER: 'ROLE_MEMBER',
+  MANAGER: 'ROLE_MANAGER',
+  ADMIN: 'ROLE_ADMIN',
+  LEAVE: 'ROLE_LEAVE',
+};

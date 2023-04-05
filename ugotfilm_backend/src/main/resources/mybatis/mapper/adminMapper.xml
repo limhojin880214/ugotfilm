@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ugotfilm.admin.dao.AdminDao">
+	<!-- 관리자 페이징 -->
+	<select id="count" resultType="int">
+		SELECT count(*) FROM ugotfilm_user
+		<if test='searchKey == "subject" or searchKey == "content"'>
+			where ${searchKey} LIKE '%'||#{searchWord}||'%'
+		</if>
+		<if test='searchKey == "total"'>
+			where subject LIKE '%'||#{searchWord}||'%'
+			OR content LIKE
+			'%'||#{searchWord}||'%'
+		</if>
+	</select>
+	
+	<!-- 관리자 페이지 리스트 -->
+	<select id="list" parameterType="PageDTO" resultType="UserDTO">
+		select
+		rownum as rm, a.* from (select * from ugotfilm_user order by usercode)
+		a
+		order by usercode
+	</select>
+
+	<!-- 권한 수정 -->
+	<update id="update" parameterType="UserDTO">
+		UPDATE ugotfilm_user
+		SET
+		authRole=#{authRole}
+		WHERE usercode=#{usercode}
+	</update>
+	
+	<!-- 관리자용 댓글 카운트 -->
+	<select id="commentCount" resultType="int">
+		SELECT count(*) FROM ugotfilm_movie_comment
+		<if test='searchKey == "subject" or searchKey == "content"'>
+			where ${searchKey} LIKE '%'||#{searchWord}||'%'
+		</if>
+		<if test='searchKey == "total"'>
+			where subject LIKE '%'||#{searchWord}||'%'
+			OR content LIKE
+			'%'||#{searchWord}||'%'
+		</if>
+	</select>
+
+	<!-- 관리자용 댓글 리스트 -->
+	<select id="commentList" parameterType="PageDTO"
+		resultType="AdminDTO">
+		select * from (select rownum as rm, a.* from (select c.*, m.title,
+		u.nickname from ugotfilm_movie_comment c
+		left join ugotfilm_movie m on
+		c.pnum = m.moviecode
+		left join ugotfilm_user u on c.writer= u.usercode
+		order by num) a)b 
+        <![CDATA[ 
+		where b.rm>=#{startRow} and b.rm <=#{endRow}
+   		]]>
+		order by num
+	</select>
+	
+</mapper>

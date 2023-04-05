@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ugotfilm.choice.dao.ChoiceDao">
+	<!-- 저장된 영화 정보 -->
+	<select id="movieInfo" parameterType="int" resultType="MovieDTO">
+		SELECT *
+		from UGOTFILM_MOVIE WHERE moviecode=#{moviecode}
+	</select>
+	
+	<!-- 로그인 한 유저가 선택한 장르(초기 설정 시) -->
+	<select id="choiceCheck" parameterType="UserDTO"
+		resultType="int">
+		SELECT count(*) from UGOTFILM_genre_choice WHERE
+		usercode=#{usercode}
+	</select>
+	
+	<!-- 유저 간 영화 정보 비교를 위한 큐레이션 파트 -->
+	<select id="checkMovie" parameterType="UserDTO" resultType="int">
+		<![CDATA[SELECT count(*) from UGOTFILM_genre_choice WHERE usercode=#{usercode} and choice_date < sysdate - 2/24]]>
+	</select>
+
+	<!-- 성별에 따른 영화 리스트 -->
+	<select id="gender" parameterType="int" resultType="MovieDTO">
+		SELECT m.*
+		FROM (
+		SELECT b.moviecode, count(b.moviecode) AS count
+		FROM
+		UGOTFILM_USER a, UGOTFILM_MOVIE_CHOICE b
+		WHERE a.usercode = b.usercode
+		AND a.gender = (SELECT gender FROM UGOTFILM_USER WHERE usercode=
+		#{usercode})
+		GROUP BY b.moviecode) g
+		LEFT JOIN UGOTFILM_MOVIE m ON
+		m.moviecode = g.moviecode ORDER BY count
+		desc
+	</select>
+
+	<!-- 장르에 따른 영화 리스트 -->
+	<select id="genre" parameterType="int" resultType="GenreDTO">
+		<![CDATA[
+		select * from
+		(
+		select g.name, u.* from (
+		select genrecode, count(genrecode) as count
+		from ugotfilm_genre_choice
+		where usercode= #{usercode}
+		group by genrecode) u
+		left join ugotfilm_genre g on g.genrecode=u.genrecode
+		order by count desc)
+		where rownum < 2
+		]]>
+	</select>
+
+
+	<!-- 영화 정보가 있는지 체크하는 쿼리 -->
+	<select id="exist" resultType="int">
+		SELECT count(*) FROM
+		ugotfilm_MOVIE where MOVIECODE=#{MOVIECODE}
+	</select>
+
+	<!-- 영화 정보를 저장하는 쿼리 -->
+	<insert id="savemovieinfo" parameterType="MovieDTO">
+		INSERT INTO
+		ugotfilm_MOVIE(MOVIECODE, TITLE, OVERVIEW, RELEASE_date, VOTE_verage,
+		genre_ids, POSTER_URL)
+		VALUES(#{MOVIECODE}, #{TITLE}, #{OVERVIEW},
+		#{RELEASE_date}, #{VOTE_verage}, #{genre_ids}, #{POSTER_URL})
+	</insert>
+
+
+	<!-- 유저 추가한 북마크 저장 쿼리 -->
+	<insert id="savebookmark" parameterType="int">
+		insert INTO
+		ugotfilm_bookmark VALUES (#{usercode}, #{movicecode}, sysdate);
+	</insert>
+
+	<!-- 유저의 성별을 가지고 전체 회원을 기준으로 가장 많이 검색한 장르 -->
+	<select id="bestGenderGenre" parameterType="UserDTO"
+		resultType="GenreDTO">
+		select r.count, g.* from (
+		select * from (
+		select genrecode,
+		count(genrecode) as count from (
+		select c.*, u.gender from
+		ugotfilm_genre_choice c
+		left join ugotfilm_user u
+		on c.usercode=u.usercode
+		where gender=#{gender})r
+		group by genrecode
+		order by count desc) where rownum=1)r
+		left join ugotfilm_genre g
+		on g.genrecode=r.genrecode
+	</select>
+
+	<!-- 유저의 성별을 가지고 전체 회원을 기준으로 가장 많이 검색한 영화 -->
+	<select id="bestGenderMovie" parameterType="UserDTO"
+		resultType="MovieDTO">
+		select r.count, g.* from (
+		select * from (
+		select moviecode,
+		count(moviecode) as count from (
+		select c.*, u.gender from
+		ugotfilm_movie_choice c
+		left join ugotfilm_user u
+		on c.usercode=u.usercode
+		where gender=#{gender})r
+		group by moviecode
+		order by count desc) )r
+		left join ugotfilm_movie g
+		on g.moviecode=r.moviecode
+	</select>
+
+	<!-- 유저의 성별을 가지고 전체 회원을 기준으로 가장 많이 검색한 감독 -->
+	<select id="bestGenderDirector" parameterType="UserDTO"
+		resultType="PersonDTO">
+		select r.count, g.* from (
+		select * from (
+		select personcode,
+		count(personcode) as count from (
+		select c.*, u.gender from
+		ugotfilm_director_choice c
+		left join ugotfilm_user u
+		on c.usercode=u.usercode
+		where gender=#{gender})r
+		group by personcode
+		order by count desc) where rownum=1)r
+		left join ugotfilm_director g
+		on g.personcode=r.personcode
+	</select>
+
+
+	<!-- 유저의 성별을 가지고 전체 회원을 기준으로 가장 많이 검색한 배우 -->
+	<select id="bestGenderCast" parameterType="UserDTO"
+		resultType="PersonDTO">
+		select r.count, g.* from (
+		select * from (
+		select personcode,
+		count(personcode) as count from (
+		select c.*, u.gender from
+		ugotfilm_cast_choice c
+		left join ugotfilm_user u
+		on c.usercode=u.usercode
+		where gender=#{gender})r
+		group by personcode
+		order by count desc) where rownum=1)r
+		left join ugotfilm_cast g
+		on g.personcode=r.personcode
+	</select>
+
+	<!-- 유저의 연령대 가지고 전체 회원 중 같은 연령대의 가장 많이 검색한 장르 -->
+	<select id="bestBirthGenre" parameterType="ChoiceDTO"
+		resultType="GenreDTO">
+	<![CDATA[ 
+		select r.count, g.*  from (
+		select * from (
+		select genrecode, count(genrecode) as count from (
+		select c.*, u.gender from ugotfilm_genre_choice c 
+		left join ugotfilm_user u 
+		on c.usercode=u.usercode 
+		where birth >= #{max} and birth <= #{min})r 
+		group by genrecode 
+		order by count desc) where rownum=1)r 
+		left join ugotfilm_genre g 
+		on g.genrecode=r.genrecode
+		]]>
+	</select>
+
+	<!-- 유저의 연령대 가지고 전체 회원 중 같은 연령대의 가장 많이 검색한 영화 -->
+	<select id="bestBirthMovie" parameterType="ChoiceDTO"
+		resultType="MovieDTO">
+	<![CDATA[ 
+		select r.count, g.*  from (
+		select * from (
+		select moviecode, count(moviecode) as count from (
+		select c.*, u.gender from ugotfilm_movie_choice c 
+		left join ugotfilm_user u 
+		on c.usercode=u.usercode 
+		where birth >= #{max} and birth <= #{min})r 
+		group by moviecode 
+		order by count desc) )r 
+		left join ugotfilm_movie g 
+		on g.moviecode=r.moviecode
+		]]>
+	</select>
+
+	<!-- 유저의 연령대 가지고 전체 회원 중 같은 연령대의 가장 많이 검색한 감독 -->
+	<select id="bestBirthDirector" parameterType="ChoiceDTO"
+		resultType="PersonDTO">
+	<![CDATA[ 
+		select r.count, g.*  from (
+		select * from (
+		select personcode, count(personcode) as count from (
+		select c.*, u.gender from ugotfilm_director_choice c 
+		left join ugotfilm_user u 
+		on c.usercode=u.usercode 
+		where birth >= #{max} and birth <= #{min})r 
+		group by personcode 
+		order by count desc) where rownum=1)r 
+		left join ugotfilm_director g 
+		on g.personcode=r.personcode
+		]]>
+	</select>
+
+	<!-- 유저의 연령대 가지고 전체 회원 중 같은 연령대의 가장 많이 검색한 배우 -->
+	<select id="bestBirthCast" parameterType="ChoiceDTO"
+		resultType="PersonDTO">
+	<![CDATA[ 
+		select r.count, g.*  from (
+		select * from (
+		select personcode, count(personcode) as count from (
+		select c.*, u.gender from ugotfilm_cast_choice c 
+		left join ugotfilm_user u 
+		on c.usercode=u.usercode 
+		where birth >= #{max} and birth <= #{min})r 
+		group by personcode 
+		order by count desc) where rownum=1)r 
+		left join ugotfilm_cast g 
+		on g.personcode=r.personcode
+		]]>
+	</select>
+
+
+	<!-- 유저의 성별을 가지고 전체 회원을 기준으로 가장 많이 검색한 장르 -->
+	<select id="bestGenre" resultType="GenreDTO">
+		select r.count, g.* from (
+		select * from (
+		select genrecode, count(genrecode) as count from (
+		select c.*, u.gender from ugotfilm_genre_choice c
+		left join ugotfilm_user u
+		on c.usercode=u.usercode)r
+		group by genrecode
+		order by count desc) where rownum=1)r
+		left join ugotfilm_genre g
+		on g.genrecode=r.genrecode
+	</select>
+
+	<!-- 유저의 성별을 가지고 전체 회원을 기준으로 가장 많이 검색한 영화 -->
+	<select id="bestMovie" resultType="MovieDTO">
+		select r.count, g.* from (
+		select * from (
+		select moviecode, count(moviecode) as count from (
+		select c.*, u.gender from ugotfilm_movie_choice c
+		left join ugotfilm_user u
+		on c.usercode=u.usercode)r
+		group by moviecode
+		order by count desc) )r
+		left join ugotfilm_movie g
+		on g.moviecode=r.moviecode
+	</select>
+
+	<!-- 유저의 성별을 가지고 전체 회원을 기준으로 가장 많이 검색한 감독 -->
+	<select id="bestDirector" resultType="PersonDTO">
+		select r.count, g.* from (
+		select * from (
+		select personcode, count(personcode) as count from (
+		select c.*, u.gender from ugotfilm_director_choice c
+		left join ugotfilm_user u
+		on c.usercode=u.usercode)r
+		group by personcode
+		order by count desc) where rownum=1)r
+		left join ugotfilm_director g
+		on g.personcode=r.personcode
+	</select>
+
+	<!-- 유저의 성별을 가지고 전체 회원을 기준으로 가장 많이 검색한 배우 -->
+	<select id="bestCast" resultType="PersonDTO">
+		select r.count, g.* from (
+		select * from (
+		select personcode, count(personcode) as count from (
+		select c.*, u.gender from ugotfilm_cast_choice c
+		left join ugotfilm_user u
+		on c.usercode=u.usercode)r
+		group by personcode
+		order by count desc) where rownum=1)r
+		left join ugotfilm_cast g
+		on g.personcode=r.personcode
+	</select>
+</mapper>

@@ -1,0 +1,132 @@
+/* 구글 폰트 적용 */
+/* https://fonts.google.com/specimen/IBM+Plex+Sans+KR */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300&display=swap');
+
+.join_form_wrap {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  border: 1px solid rgb(224, 224, 224);
+  border-radius: 20px;
+  width: 800px;
+  height: 850px;
+  /* 수직, 수평 가운데 정렬 */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.join_form_container {
+  float: right;
+  width: 398px;
+  height: 850px;
+  border-left: 1px solid rgb(224, 224, 224);
+}
+
+.existing_user_login_box {
+  width: 398px;
+  height: 850px;
+  float: left;
+}
+
+.existing_user_login_text {
+  margin-top: 80px;
+  font-size: 20px;
+  color: rgb(73, 73, 73);
+}
+
+.existing_user_login_btn {
+  border: none;
+  background-color: transparent;
+}
+
+.go_existing_login {
+  font-weight: bolder;
+}
+
+.go_existing_login:hover {
+  color: rgba(72, 47, 214, 0.719);
+}
+
+.join_form_img {
+  border-radius: 50%;
+  margin-top: 20px;
+  width: 320px;
+}
+
+.join_form_title {
+  padding: 50px;
+  font-size: 35px;
+  font-weight: bold;
+  /* 자간 간격 */
+  letter-spacing: 20px;
+  color: rgb(139, 139, 139);
+  margin: 0 auto;
+}
+
+.logo_text {
+  text-align: left;
+}
+
+.join_form_input {
+  border: none;
+  border-bottom: 1px solid gainsboro;
+  border-radius: 0%;
+  width: 300px;
+  margin: 0 auto;
+}
+
+.form-check label {
+  margin: 30px;
+  font-size: 13px;
+}
+
+.login_btn {
+  background-color: gray;
+  border: none;
+  margin: 10px;
+  margin-top: 50px;
+}
+
+.login_btn_box_style {
+  border: none;
+  background-color: rgb(172, 172, 172);
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.login_btn_box_style:hover {
+  background-color: rgb(116, 116, 116);
+}
+
+.login_btn:hover {
+  background-color: rgb(172, 172, 172);
+}
+
+.join_form_text {
+  font-weight: bolder;
+  text-align: left;
+  margin: 20px 0 0 60px;
+  color: rgb(122, 122, 122);
+}
+
+input::placeholder {
+  font-size: 15px;
+  font-style: italic;
+}
+
+.birth_select {
+  border: none;
+  color: rgb(122, 122, 122);
+  margin-left: 30px;
+}
+
+.gender_input_box {
+  float: right;
+  margin-right: 160px;
+}
+
+.gender_input {
+  margin-left: 30px;
+}

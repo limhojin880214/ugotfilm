@@ -1,0 +1,192 @@
+/* 구글 폰트 적용 */
+/* https://fonts.google.com/specimen/IBM+Plex+Sans+KR */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300&display=swap');
+
+.user_contents_wrap {
+  width: 902px;
+  height: 100%;
+  margin: 0 auto;
+  font-family: 'IBM Plex Sans KR', sans-serif;
+}
+
+/* 컨텐츠 공통 */
+.user_contents {
+  background-color: rgb(240, 240, 240);
+  border-radius: 20px;
+  margin: 40px 0 40px 0;
+  width: 100%;
+  height: 400px;
+  padding: 10px 20px 10px 20px;
+}
+
+/* 프로필 */
+.user_profile_menu {
+  text-align: right;
+  text-decoration: none;
+}
+
+.user_profile {
+  background-color: rgb(216, 216, 216);
+  width: 100%;
+  height: 100px;
+  color: black;
+  border-radius: 20px;
+  letter-spacing: 15px;
+}
+
+.user_profile_menu_icon {
+  width: 30px;
+  height: 30px;
+  margin-left: 10px;
+}
+
+.user_profile_icon {
+  width: 50px;
+  height: 50px;
+  float: left;
+}
+
+.user_name {
+  height: 50px;
+  font-size: 35px;
+  text-align: left;
+  margin-left: 65px;
+}
+
+.user_name span {
+  font-weight: bolder;
+}
+
+/* 컨텐츠 리스트 */
+
+/* 영화 선호 태그 영역 */
+.user_tag {
+  background-color: rgb(68, 68, 68);
+  height: 450px;
+  border: none;
+}
+
+/* 선호 취향 소개 */
+.best_one {
+  color: black;
+  font-size: 18px;
+  padding-bottom: 20px;
+}
+.best_one span {
+  font-weight: bolder;
+}
+
+.user_actor_list {
+  /* background-color: aqua; */
+  padding: 0 10px 0 10px;
+  overflow: scroll;
+  width: 100%;
+  height: 230px;
+  margin: 0 auto;
+}
+
+/* 스크롤바 숨기기 */
+.user_actor_list::-webkit-scrollbar {
+  display: none;
+}
+
+.list_intro {
+  width: 260px;
+  height: 100px;
+  background-color: rgb(234, 232, 232);
+  margin: 10px;
+  float: left;
+
+  border-radius: 20px;
+}
+
+/* 배우, 감독 프로필 사진 */
+.list_img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  float: left;
+  padding: 5px;
+  /* 사진 비율 유지 */
+  object-fit: cover;
+}
+
+.person_data {
+  width: 250px;
+  text-align: center;
+  margin-top: 20px;
+  color: black;
+}
+
+.person_data span:hover {
+  color: rgb(87, 87, 87);
+}
+
+.actor_name {
+  font-size: 20px;
+  color: black;
+  font-weight: bolder;
+}
+
+.movie_name {
+  color: black;
+}
+
+/* 국가, 장르 */
+
+.user_genre_list {
+  width: 100%;
+  height: 100%;
+}
+
+.list_top_box {
+  overflow: scroll;
+  width: 100%;
+  height: 230px;
+  margin: 0 auto;
+}
+/* 스크롤바 숨기기 */
+.list_top_box::-webkit-scrollbar {
+  display: none;
+}
+
+.list_top3 {
+  padding: 10px 0 10px 0;
+  margin-bottom: 10px;
+  border-top: 1px solid gray;
+  border-bottom: 1px solid gray;
+  float: left;
+  text-align: center;
+  width: 285px;
+  height: 70px;
+}
+
+.list_top3_name {
+  color: black;
+  font-weight: bolder;
+  font-size: 20px;
+}
+
+.list_top3_name:hover {
+  color: rgb(87, 87, 87);
+}
+
+.top_list {
+  width: 100%;
+  color: grey;
+  font-size: 18px;
+}
+
+.top_list_name {
+  float: left;
+  width: 660px;
+  height: 30px;
+  text-align: left;
+}
+
+.top_list_count {
+  float: right;
+  width: 200px;
+  height: 30px;
+  text-align: right;
+}

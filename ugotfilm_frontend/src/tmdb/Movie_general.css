@@ -1,0 +1,90 @@
+/* 구글 폰트 적용 */
+/* https://fonts.google.com/specimen/IBM+Plex+Sans+KR */
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300&display=swap");
+
+/* =========================================================== */
+
+/* Movie_general CSS */
+/* 전체 div */
+.movie_general_wrap {
+  /* 헤더 크기만큼 패딩값 주기 */
+  font-family: "IBM Plex Sans KR", sans-serif;
+}
+
+/* 검색창 */
+.movie_general_wrap form {
+  position: fixed;
+  width: 300px;
+  height: 40px;
+  left: 10%;
+  margin-top: 20px;
+  z-index: 99;
+}
+
+.search_content {
+  background-color: rgb(255, 255, 255);
+  border: none;
+  width: 300px;
+  border-radius: 20px;
+  text-align: left;
+}
+
+.search_option {
+  background-color: rgb(255, 255, 255);
+  border: none;
+  margin-right: 10px;
+  border-radius: 20px;
+}
+
+.search_box option {
+  border-radius: 20px;
+}
+
+.search_result_text_box {
+  font-size: 20px;
+}
+
+.search_result_input {
+  font-weight: bolder;
+}
+
+/* =========================================================== */
+
+/* Naver_info.js css */
+/* 검색결과창 */
+
+.search_movie_wrap {
+  width: 1400px;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.search_movie_content {
+  padding-top: 100px;
+  width: 200px;
+  height: 300px;
+  float: left;
+}
+
+.poster {
+  width: 150px;
+  height: 225px;
+}
+
+.search_movie_title {
+  width: 150px;
+  font-size: 15px;
+  font-weight: bold;
+  color: black;
+  margin: 0 auto;
+}
+
+.search_movie_text {
+  width: 150px;
+  margin: 0 auto;
+  color: gray;
+}
+
+.star_rating {
+  color: gold;
+}

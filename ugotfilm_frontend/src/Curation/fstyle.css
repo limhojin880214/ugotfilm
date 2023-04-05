@@ -1,0 +1,94 @@
+.firstchoice_wrap {
+  /* background-color: aqua; */
+  border: 1px solid #a3a3a3;
+  border-radius: 50px;
+  width: 1200px;
+  height: 790px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.firstchoice_title {
+  font-size: 35px;
+  letter-spacing: 20px;
+  padding: 25px 0 25px 0;
+  margin: 0 auto;
+  color: rgb(97, 97, 97);
+}
+
+.firstchoice_content {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.firstchoice_content_btn {
+  width: 400px;
+  height: 500px;
+  margin: 20px;
+
+  overflow: hidden;
+  padding: 0px;
+}
+
+/* .style {
+  width: 100vw;
+  height: 100vh;
+} */
+
+/*  
+////////////////////////////////////////////////////////////////////////////////////////////////
+*/
+
+.btn-sm {
+  /*  button color : hidden */
+
+  /* width: 45vw;
+  height: 70vh; */
+
+  background-color: #2f3636;
+  color: white;
+
+  display: inline-block;
+  opacity: 0.2; /* 초기화면 반투명상태 시작 */
+  transition: 1.3s;
+  cursor: pointer;
+}
+
+.btn-sm:hover {
+  opacity: 1; /* 마우스 진입 시 1은 진하게, 0은 사라지게 표시 */
+}
+
+/*  
+////////////////////////////////////////////////////////////////////////////////////////////////
+*/
+
+.btn-skip {
+  /*  button color : hidden */
+
+  width: 35vw;
+  height: 9vh;
+
+  background-color: #2f3636;
+  color: white;
+
+  display: inline-block;
+  opacity: 0.1; /* 초기화면 반투명상태 시작 */
+  transition: 1.3s;
+  cursor: pointer;
+}
+
+.btn-skip:hover {
+  opacity: 1; /* 마우스 진입 시 1은 진하게, 0은 사라지게 표시 */
+}
+
+/*  
+////////////////////////////////////////////////////////////////////////////////////////////////
+*/
+
+/* 
+.hidden {
+ 작동 안됨 
+
+  opacity: 0.5;
+  transition: 1.3s;
+} */

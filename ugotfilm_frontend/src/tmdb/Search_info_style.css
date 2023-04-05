@@ -1,0 +1,63 @@
+/* search_movie, search_person CSS */
+
+/* search_movie.js css */
+
+.search_wrap {
+  width: 1400px;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.search_movie_text {
+  padding-top: 10px;
+  width: 150px;
+  margin: 0 auto;
+  color: gray;
+  font-size: 15px;
+}
+
+.search_movie_title {
+  width: 150px;
+  font-size: 15px;
+  font-weight: bold;
+  color: black;
+  margin: 0 auto;
+}
+
+.search_movie_title:hover {
+  color: gray;
+}
+
+.star_rating {
+  color: gold;
+}
+
+/* ================================================================== */
+
+/* search_person.js css */
+
+.search_person {
+  float: left;
+  width: 200px;
+  height: 300px;
+}
+
+.search_person_image {
+  width: 150px;
+  height: 225px;
+  margin: 0 auto;
+}
+
+.search_person_name {
+  padding-top: 10px;
+  color: black;
+  font-weight: bolder;
+}
+
+.search_person_name:hover {
+  color: gray;
+}
+
+.search_person_department {
+  color: gray;
+}

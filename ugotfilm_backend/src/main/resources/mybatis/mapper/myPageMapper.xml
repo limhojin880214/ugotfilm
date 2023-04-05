@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ugotfilm.mypage.dao.MypageDao">
+
+	<!-- 유저가 선호하는 감독 리스트 -->
+	<select id="bestDirector" parameterType="UserDTO"
+		resultType="PersonDTO">
+		select r.count, g.* from (
+		select * from (
+		select personcode,
+		count(personcode) as count from (
+		select * from
+		ugotfilm_director_choice where usercode=#{usercode})r
+		group by personcode))r
+		left join ugotfilm_director g
+		on g.personcode=r.personcode
+		order by count desc
+	</select>
+
+	<!-- 유저가 선호하는 배우 리스트 -->
+	<select id="bestCast" parameterType="UserDTO"
+		resultType="PersonDTO">
+		select r.count, g.* from (
+		select * from (
+		select personcode,
+		count(personcode) as count from (
+		select * from ugotfilm_cast_choice
+		where usercode=#{usercode})r
+		group by personcode))r
+		left join ugotfilm_cast g
+		on g.personcode=r.personcode
+		order by count desc
+	</select>
+
+	<!-- 유저가 선호하는 장르 리스트 -->
+	<select id="bestGenre" parameterType="UserDTO"
+		resultType="GenreDTO">
+		select r.count, g.* from (
+		select * from (
+		select genrecode,
+		count(genrecode) as count from (
+		select * from ugotfilm_genre_choice
+		where usercode=#{usercode})r
+		group by genrecode))r
+		left join ugotfilm_genre g
+		on g.genrecode=r.genrecode
+		order by count desc
+	</select>
+</mapper>

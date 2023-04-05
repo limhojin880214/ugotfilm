@@ -1,0 +1,509 @@
+/* 구글 폰트 적용 */
+/* https://fonts.google.com/specimen/IBM+Plex+Sans+KR */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300&display=swap');
+
+/* =================================================================== */
+
+/* Tmdb_main.js css */
+.Tmdb_main_wrap {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  background-color: black;
+  padding-top: 100px;
+  width: 100%;
+  height: 100%;
+}
+
+.tag_name {
+  text-align: left;
+  font-size: 25px;
+  font-weight: bolder;
+  padding-left: 50px;
+  color: white;
+}
+
+.main_chart {
+  width: 1700px;
+  height: 550px;
+  overflow: auto;
+  margin: 0 auto;
+}
+
+/* 스크롤바 숨기기 */
+.main_chart::-webkit-scrollbar {
+  display: none;
+}
+
+.plus_button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-weight: bolder;
+  font-size: 35px;
+  color: white;
+  background-color: black;
+}
+
+.plus_button:hover {
+  color: rgb(117, 117, 117);
+}
+
+/* =================================================================== */
+
+/* Tmdb_now.js, Tmdb_pop.js css */
+
+.movie_tile {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  margin: 10px;
+  padding: 10px;
+  float: left;
+  width: 300px;
+  height: 550px;
+}
+
+.movie_poster img {
+  width: 300px;
+  height: 450px;
+}
+
+.movie_title p {
+  margin-top: 10px;
+  font-size: 18px;
+  color: white;
+  font-weight: bolder;
+  padding-top: 10px;
+}
+
+.movie_title p:hover {
+  color: gainsboro;
+}
+
+/* =================================================================== */
+
+/* Tmdb_detail.js css */
+.detail_wrap {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  padding: 150px 0 150px 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* 영화정보: 포스터, 제목, 줄거리, 장르, 개봉일 */
+/* 영화정보 박스 */
+.movie_detail {
+  width: 1000px;
+  height: 510px;
+  margin: 0 auto;
+  border-top: 1px solid gray;
+  border-bottom: 1px solid gray;
+}
+
+/* 포스터 */
+.poster_img {
+  width: 300px;
+  height: 450px;
+  float: left;
+  margin: 25px;
+}
+
+.movie_detail_text {
+  width: 600px;
+  height: 450px;
+  float: right;
+  text-align: left;
+  padding: 10px;
+}
+
+.movie_title_box {
+  margin: 10px 0 25px 0;
+}
+
+.movie_title_img {
+  width: 40px;
+  height: 40px;
+  vertical-align: text-bottom; /* 텍스트랑 높이 맞추기 이미지에 먹여야됨 */
+}
+
+.movie_title {
+  font-size: 35px;
+  font-weight: bolder;
+  margin: 15px;
+}
+
+.movie_overview {
+  width: 600px;
+  height: 240px;
+  font-size: 20px;
+  overflow: auto;
+  margin-bottom: 50px;
+}
+
+/* 스크롤바 숨기기 */
+.movie_overview::-webkit-scrollbar {
+  display: none;
+}
+
+.movie_genre_date {
+  margin-top: 30px;
+}
+
+.outline_title {
+  color: rgb(78, 78, 78);
+  font-weight: bolder;
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.outline_content {
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+/* 감독정보, 배우정보 공통 */
+
+.detail_box {
+  width: 1000px;
+  height: 280px;
+  margin: 0 auto;
+  text-align: left;
+  padding-top: 30px;
+  overflow: auto;
+}
+
+/* 스크롤바 숨기기 */
+.detail_box::-webkit-scrollbar {
+  display: none;
+}
+
+.detail_content {
+  width: 140px;
+  height: 220px;
+  margin: 0 auto;
+  float: left;
+}
+
+.detail_title {
+  font-weight: bolder;
+  font-size: 20px;
+  text-align: left;
+  padding: 0 0 15px 15px;
+}
+
+.crew_img {
+  width: 100px;
+  height: 150px;
+  margin: 0 15px 10px 15px;
+}
+
+.crew_name {
+  font-size: 15px;
+  text-align: center;
+  text-decoration: none;
+  color: black;
+  font-weight: bolder;
+}
+
+.crew_name:hover {
+  color: rgb(74, 74, 74);
+}
+
+/* 댓글 */
+
+.detail_comment {
+  width: 1000px;
+  height: 100%;
+  margin: 0 auto;
+  font-size: 15px;
+}
+
+.detail_comment_write_box {
+  width: 1000px;
+  height: 100%;
+  margin: 0 auto;
+  font-size: 15px;
+}
+
+.detail_comment_textarea {
+  width: 900px;
+  height: 30px;
+  float: left;
+}
+
+.detail_comment_btn {
+  border-radius: 8px;
+  background-color: gray;
+  border: none;
+  padding: 5px;
+  color: white;
+  float: right;
+}
+
+/* =================================================================== */
+
+/* Tmdb_person.js CSS */
+
+.person_detail_wrap {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  padding: 130px 0 150px 0;
+  width: 1400px;
+  height: 900px;
+  margin: 0 auto;
+}
+
+.person_detail_subject {
+  font-size: 30px;
+  margin: 0 0 10px 20px;
+  text-align: left;
+  font-weight: bolder;
+}
+
+.person_title_img {
+  width: 35px;
+  height: 40px;
+  vertical-align: sub; /* 텍스트랑 높이 맞추기 이미지에 적용 */
+  margin-right: 10px;
+}
+
+.person_detail_profile {
+  width: 350px;
+  height: 80%;
+  float: left;
+  position: fixed;
+  border-right: 1px solid gray;
+}
+
+.person_detail_img {
+  width: 300px;
+  height: 450px;
+  margin: 0 25px 10px 25px;
+  /* background-color: red; */
+}
+
+.person_detail_text {
+  width: 300px;
+  height: 125px;
+  margin: 0 25px 25px 25px;
+}
+
+.person_detail_name {
+  font-weight: bolder;
+  font-size: 25px;
+}
+
+.person_detail_birth,
+.person_detail_department {
+  color: rgb(80, 80, 80);
+}
+
+/* =================================================================== */
+
+/* Tmdb_credit.js CSS */
+
+.cast_detail_movie {
+  width: 1000px;
+  height: 80%;
+  float: right;
+  overflow: auto;
+}
+
+/* 스크롤바 숨기기 */
+.cast_detail_movie::-webkit-scrollbar {
+  display: none;
+}
+
+.cast_detail_subject {
+  text-align: left;
+  margin: 0 0 20px 420px;
+  font-size: 25px;
+  font-weight: bolder;
+}
+
+/* Tmdb_credit_crew.js, Tmdb_credit_cast.js CSS */
+
+.cast_wrap {
+  width: 250px;
+  height: 450px;
+  float: left;
+}
+
+.cast_img {
+  width: 200px;
+  height: 300px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+
+.cast_title {
+  font-weight: bolder;
+  color: black;
+}
+
+.cast_title:hover {
+  color: rgb(74, 74, 74);
+}
+
+/* ===================================================== */
+
+/* 메인 */
+
+/* 왼쪽 */
+
+.MainSideDiv {
+  width: 180px;
+  height: 600px;
+  border-radius: 30px;
+  background-color: rgb(85, 85, 85);
+  /* 플로팅 */
+  position: fixed;
+  top: 120px; /* 윗쪽 끝에서부터의 거리 */
+  left: 30px;
+  z-index: 98;
+}
+
+.main_side_btn_subject {
+  padding-top: 20px;
+  width: 180px;
+  height: 100%;
+  text-align: center;
+  float: left;
+  color: white;
+}
+
+.main_side_btn_subject_txt {
+  color: white;
+  font-size: 15px;
+  border-bottom: 1px solid rgb(215, 215, 215);
+  font-weight: bold;
+}
+
+.main_side_btn_subject_txt:hover {
+  color: rgb(0, 0, 0);
+}
+
+.main_side_btn_title {
+  width: 50px;
+  height: 30px;
+  font-size: 15px;
+  color: white;
+  font-weight: bold;
+}
+
+.main_side_btn_title:hover {
+  color: rgb(0, 0, 0);
+}
+
+/* 중간 */
+
+/*======================== */
+
+/* 현재상영작 */
+.now_playing_wrap {
+  background-color: rgb(85, 85, 85);
+  border-radius: 30px;
+  width: 230px;
+  height: 250px;
+  margin: 0 auto;
+  overflow: auto;
+  z-index: 99;
+  /* 화면 고정 */
+  position: fixed;
+  top: 120px; /* 윗쪽 끝에서부터의 거리 */
+  right: 10px;
+}
+
+/* 현재상영작 스크롤바 숨기기 */
+.now_playing_wrap::-webkit-scrollbar {
+  display: none;
+}
+
+.Tmdb_now_movie_title {
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  text-align: left;
+  margin: 15px;
+}
+
+.Tmdb_now_movie_title:hover {
+  color: rgb(47, 63, 47);
+}
+
+/* 인기영화 */
+.popular_wrap {
+  background-color: rgb(85, 85, 85);
+  border-radius: 30px;
+  width: 230px;
+  height: 245px;
+  margin: 0 auto;
+  overflow: auto;
+  z-index: 99;
+  /* 화면 고정 */
+  position: fixed;
+  top: 440px; /* 윗쪽 끝에서부터의 거리 */
+  right: 10px;
+}
+
+/* 인기영화 스크롤바 숨기기 */
+.popular_wrap::-webkit-scrollbar {
+  display: none;
+}
+
+.Tmdb_pop_movie_title {
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  text-align: left;
+  margin: 15px;
+}
+
+.Tmdb_pop_movie_title:hover {
+  color: rgb(47, 63, 47);
+}
+
+.main_right_title {
+  position: fixed;
+  width: 230px;
+  height: 50px;
+  border-bottom: 1px solid white;
+  font-weight: bolder;
+  color: white;
+  font-size: 20px;
+  padding: 10px 0 10px 0;
+  padding-left: 40px;
+}
+
+.button_wrap {
+  width: 30px;
+  height: 30px;
+  float: right;
+  margin-right: 20px;
+}
+
+.plus_button {
+  float: left;
+  background-color: transparent;
+}
+
+.plus_button_txt {
+  vertical-align: top;
+  font-size: 20px;
+  font-weight: bolder;
+  color: white;
+}
+
+.plus_button_txt:hover {
+  color: rgb(47, 63, 47);
+}
+
+.main_chart {
+  width: 230px;
+  height: 195px;
+  margin-top: 50px;
+  overflow: auto;
+}
+
+/* 현재상영작 스크롤바 숨기기 */
+.main_chart::-webkit-scrollbar {
+  display: none;
+}
+
+/* =========================================================== */

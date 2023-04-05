@@ -1,0 +1,142 @@
+/* 구글 폰트 적용 */
+/* https://fonts.google.com/specimen/IBM+Plex+Sans+KR */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300&display=swap');
+
+/* HEADER */
+
+.header {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  position: fixed; /*헤더 페이지 상단에 고정*/
+  width: 100%;
+  height: 90px;
+  background-color: rgb(85, 85, 85);
+  color: whitesmoke;
+  float: left;
+  z-index: 99;
+}
+
+.header_list {
+  list-style-type: none;
+  /* text-decoration: none; */
+}
+
+.menu_name {
+  float: right;
+  margin-right: 40px;
+  font-size: 20px;
+  color: white;
+  text-decoration: none;
+}
+
+.menu_name:hover {
+  font-weight: bolder;
+}
+
+.logo_box {
+  width: 300px;
+  height: 50px;
+}
+
+.logo_box_img {
+  width: 240px;
+}
+
+.logo_name {
+  font-weight: bolder;
+  font-size: 40px;
+  text-align: left;
+  color: white;
+}
+/* =================================================================== */
+
+/* FOOTER */
+.footer {
+  margin-top: 30px;
+  background-color: rgb(85, 85, 85);
+  width: 100%;
+  height: 130px;
+  color: white;
+  float: left;
+  z-index: 99;
+}
+
+.footer_content {
+  width: 1300px;
+  height: 130px;
+  margin: 0 auto;
+}
+
+.footer_left {
+  width: 1000px;
+  height: 130px;
+  float: left;
+}
+
+.footer_project_team {
+  width: 100%;
+  height: 130px;
+  padding-left: 20px;
+}
+
+.footer_project_info {
+  font-weight: bolder;
+  font-size: 20px;
+  text-align: left;
+  padding-bottom: 5px;
+}
+
+.footer_project_info_txt {
+  text-align: left;
+  padding-bottom: 10px;
+}
+
+.footer_right {
+  width: 300px;
+  height: 130px;
+  float: right;
+  border-left: 1px solid white;
+}
+
+.footer_ugf {
+  width: 300px;
+  height: 130px;
+  float: left;
+  text-align: left;
+  font-size: 20px;
+  /* 자간 간격 */
+  letter-spacing: 20px;
+  color: white;
+  border-right: 1px solid white;
+  padding-top: 10px;
+}
+
+.footer_logo {
+  margin-top: 15px;
+  width: 100px;
+}
+
+.footer_project_team {
+  padding-top: 25px;
+  width: 700px;
+  float: right;
+  text-align: center;
+}
+
+.footer_notice_board {
+  padding: 10px;
+}
+
+.footer_notice_board_txt {
+  color: white;
+}
+
+.footer_notice_board_txt:hover {
+  color: black;
+}
+
+.footer_sns_box {
+}
+
+.footer_sns_box_img {
+  margin: 10px;
+}

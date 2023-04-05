@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ugotfilm.data.dao.DataDao">
+
+
+	<!-- 영화 정보를 저장하는 쿼리 -->
+	
+	<!-- 영화 정보 -->
+	<insert id="saveMovie" parameterType="MovieDTO">
+		MERGE into ugotfilm_movie
+		using dual on (moviecode=#{moviecode}) WHEN MATCHED THEN update set
+		title=#{title}, poster_url=#{poster_url, jdbcType=VARCHAR}
+		when not
+		MATCHED then insert (moviecode, title, poster_url) VALUES
+		(#{moviecode}, #{title}, #{poster_url, jdbcType=VARCHAR})
+	</insert>
+	
+	<!-- 감독 정보 -->
+	<insert id="saveCrew" parameterType="PersonDTO">
+		MERGE into ugotfilm_director
+		using dual on (personcode=#{personcode}) WHEN MATCHED THEN update set
+		name=#{name}, profile_url=#{profile_url, jdbcType=VARCHAR}
+		when not
+		MATCHED then insert (personcode, name, profile_url) VALUES
+		(#{personcode}, #{name}, #{profile_url, jdbcType=VARCHAR})
+	</insert>
+
+	<!-- 배우 정보 -->
+	<insert id="saveCast" parameterType="PersonDTO">
+		MERGE into ugotfilm_cast
+		using dual on (personcode=#{personcode}) WHEN MATCHED THEN update set
+		name=#{name}, profile_url=#{profile_url, jdbcType=VARCHAR}
+		when not
+		MATCHED then insert (personcode, name, profile_url) VALUES
+		(#{personcode}, #{name}, #{profile_url, jdbcType=VARCHAR})
+	</insert>
+	
+	<!-- 장르 정보 -->
+	<insert id="saveGenre" parameterType="GenreDTO">
+		MERGE into ugotfilm_genre
+		using dual on (genrecode=#{genrecode}) WHEN MATCHED THEN update set
+		name=#{name}
+		when not MATCHED then insert (genrecode, name) VALUES
+		(#{genrecode}, #{name})
+	</insert>
+
+
+	<!-- 유저 영화취향 정보 추가 -->
+	<insert id="choiceMovie" parameterType="MovieDTO">
+		INSERT INTO
+		ugotfilm_movie_choice(usercode, moviecode, choice_date)
+		VALUES(#{usercode}, #{moviecode},sysdate)
+	</insert>
+
+	<!-- 유저 감독취향 정보 추가 -->
+	<insert id="choiceCrew" parameterType="PersonDTO">
+		INSERT INTO
+		ugotfilm_director_choice(usercode, personcode, choice_date)
+		VALUES(#{usercode}, #{personcode},sysdate)
+	</insert>
+
+	<!-- 유저 배우취향 정보 추가 -->
+	<insert id="choiceCast" parameterType="PersonDTO">
+		INSERT INTO
+		ugotfilm_cast_choice(usercode, personcode, choice_date)
+		VALUES(#{usercode}, #{personcode},sysdate)
+	</insert>
+
+	<!-- 유저 장르취향 정보 추가 -->
+	<insert id="choiceGenre" parameterType="GenreDTO">
+		INSERT INTO
+		ugotfilm_genre_choice(usercode, genrecode, choice_date)
+		VALUES(#{usercode}, #{genrecode}, sysdate)
+	</insert>
+	
+</mapper>

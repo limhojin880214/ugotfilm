@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ugotfilm.notice.dao.CommentDao">
+
+	<!-- 댓글 카운팅 -->
+	<select id="count" parameterType="BoardDTO" resultType="int">
+		SELECT
+		count(*) FROM ugotfilm_notice_comment where pnum = #{pnum}
+	</select>
+	
+	<!-- 댓글 뷰 -->
+	<select id="comment" parameterType="PageDTO"
+		resultType="BoardDTO">
+		select b.*, u.nickname from(
+		select * from ugotfilm_notice_comment
+		where pnum = #{pnum}
+		order by num asc) b
+		left join ugotfilm_user u
+		on b.writer=u.usercode
+		order by num
+	</select>
+	
+	<!-- 댓글 작성 -->
+	<insert id="saveComment" parameterType="BoardDTO">
+		INSERT INTO
+		ugotfilm_notice_comment(pnum, num, writer, reg_date, subject, ip)
+		VALUES(#{pnum}, ugotfilm_notice_comment_seq.nextval, #{writer,
+		jdbcType=VARCHAR},sysdate,
+		#{subject, jdbcType=VARCHAR}, #{ip, jdbcType=VARCHAR})
+	</insert>
+	
+	<!-- 대댓글 -->
+	<update id="reStepCount" parameterType="BoardDTO">
+		UPDATE
+		ugotfilm_notice_comment SET
+		re_step
+		= re_step + 1
+		WHERE ref=#{ref} AND
+		re_step > #{re_step}
+	</update>
+	
+	<!-- 댓글 수정 -->
+	<update id="update" parameterType="BoardDTO">
+		UPDATE ugotfilm_notice_comment
+		SET subject=#{subject}
+		WHERE num=#{num}
+	</update>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="deleteComment" parameterType="int">
+		DELETE FROM
+		ugotfilm_notice_comment
+		WHERE
+		num=#{num}
+	</delete>
+</mapper>

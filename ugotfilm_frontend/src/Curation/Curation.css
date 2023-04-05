@@ -1,0 +1,73 @@
+/* basic_curation CSS */
+
+.basic_curation_wrap {
+  padding: 30px 0 30px 0;
+  border: 1px solid rgb(165, 165, 165);
+  border-radius: 50px;
+  width: 1300px;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.basic_curation_component {
+  width: 1200px;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.basic_curation_subject {
+  font-size: 25px;
+  margin-bottom: 30px;
+}
+
+.basic_curation_info {
+  width: 200px;
+  height: 450px;
+}
+
+.basic_curation_img {
+  width: 200px;
+  height: 300px;
+}
+
+.basic_curation_title {
+  width: 200px;
+  height: 100px;
+  color: black;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.basic_curation_title:hover {
+  color: gray;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  font-family: 'slick';
+  font-size: 20px;
+  line-height: 50%;
+  opacity: 0.75;
+  color: black;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.basic_curation_plus_btn {
+  border: none;
+  background-color: transparent;
+  font-size: 30px;
+  font-weight: bolder;
+}
+
+.basic_curation_plus_btn:hover {
+  color: gray;
+}
+
+.curation_explain {
+  font-size: 35px;
+  /* 자간 간격 */
+  letter-spacing: 50px;
+  color: rgb(65, 65, 65);
+  margin: 0 auto;
+}

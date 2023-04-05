@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ugotfilm.notice.dao.BoardDao">
+
+	<!-- 게시판 카운트 -->
+	<select id="count" resultType="int">
+		SELECT count(*) FROM ugotfilm_notice_board
+		<if test='searchKey == "subject" or searchKey == "content"'>
+			where ${searchKey} LIKE '%'||#{searchWord}||'%'
+
+		</if>
+		<if test='searchKey == "total"'>
+			where subject LIKE '%'||#{searchWord}||'%'
+			OR content LIKE
+			'%'||#{searchWord}||'%'
+
+		</if>
+	</select>
+	
+	<!-- 게시판 리스트 -->
+	<select id="list" parameterType="PageDTO" resultType="BoardDTO">
+		select b.*, u.nickname from
+		(select rownum as rm, a.* from (
+		select *
+		from ugotfilm_notice_board
+		<if test='searchKey == "subject" or searchKey == "content"'>
+			WHERE ${searchKey} LIKE '%'||#{searchWord}||'%'
+		</if>
+		<if test='searchKey == "total"'>
+			WHERE subject LIKE '%'||#{searchWord}||'%'
+			OR content LIKE
+			'%'||#{searchWord}||'%'
+		</if>
+		order by ref desc, re_step asc) a)b
+		left join ugotfilm_user u
+		on
+		b.writer=u.usercode
+   <![CDATA[ 
+      where b.rm>=#{startRow} and b.rm <=#{endRow}
+   ]]>
+		order by ref desc, re_step asc
+	</select>
+	
+	<!-- 게시판 작성 -->
+	<insert id="save" parameterType="BoardDTO">
+		INSERT INTO ugotfilm_notice_board(num, writer, subject, reg_date,
+		readcount, ref, re_step, re_level, content, ip, upload)
+		VALUES(ugotfilm_notice_board_seq.nextval, #{writer,
+		jdbcType=VARCHAR},
+		#{subject},sysdate, 0,
+		<choose>
+			<when test="ref==0">
+				ugotfilm_notice_board_seq.nextval
+			</when>
+			<otherwise>
+				#{ref}
+			</otherwise>
+		</choose>
+		, #{re_step}, #{re_level}, #{content, jdbcType=VARCHAR}, #{ip,
+		jdbcType=VARCHAR}, #{upload, jdbcType=VARCHAR}
+
+		)
+	</insert>
+	
+	<!-- 조회수 -->
+	<update id="readCount" parameterType="int">
+		UPDATE
+		ugotfilm_notice_board
+		SET
+		readcount
+		= readcount + 1
+		WHERE num=#{num}
+	</update>
+	
+	<!-- 게시판 뷰 -->
+	<select id="content" parameterType="int" resultType="BoardDTO">
+		select b.*,
+		u.nickname from
+		(SELECT * FROM
+		ugotfilm_notice_board
+		WHERE num=#{num}) b
+		left join ugotfilm_user u
+		on b.writer=u.usercode
+	</select>
+	
+	<!-- 게시판 파일 업로드 -->
+	<select id="uploadFile" parameterType="int" resultType="String">
+		SELECT
+		upload FROM ugotfilm_notice_board
+		WHERE num=#{num}
+	</select>
+	
+	<!-- 답글 작성 -->
+	<update id="reStepCount" parameterType="BoardDTO">
+		UPDATE
+		ugotfilm_notice_board SET
+		re_step
+		= re_step + 1
+		WHERE ref=#{ref} AND
+		re_step > #{re_step}
+	</update>
+	
+	<!-- 게시판 수정 -->
+	<update id="update" parameterType="BoardDTO">
+		UPDATE ugotfilm_notice_board
+		SET subject=#{subject},
+		content=#{content}
+		<if test="upload!=null">
+			, upload=#{upload}
+		</if>
+		WHERE num=#{num}
+	</update>
+	
+	<!-- 게시판 삭제 -->
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+		ugotfilm_notice_board
+		WHERE
+		num=#{num}
+	</delete>
+</mapper>
